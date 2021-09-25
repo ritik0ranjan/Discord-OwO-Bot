@@ -130,7 +130,7 @@ module.exports = new CommandInterface({
 		}
 
 		let text = `**🛠 | ${msg.author.username}**, You successfully upgraded \`${trait}\` with  **${p.global.toFancyNum(count)} Animal Essence** ${essence}!`;
-		text += `\n**<:blank:427371936482328596> |** \`${trait}: ${stat.stat + stat.prefix} -  Lvl ${stat.lvl} ${stat.max ? "[MAX]" : `[${stat.currentxp}/${stat.maxxp}}]`}\``;
+		text += `\n**<:blank:427371936482328596> |** \`${trait}: ${stat.stat + stat.prefix} -  Lvl ${stat.lvl} ${stat.max ? "[MAX]" : `[${stat.currentxp}/${stat.maxxp}]`}\``;
 		if (stat.max) {
 			text += "\n**<:blank:427371936482328596> |** HuntBot is at max level!";
 		} else if (stat.lvlup) {
