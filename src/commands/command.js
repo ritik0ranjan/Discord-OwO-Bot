@@ -30,9 +30,10 @@ class Command {
 	async execute (msg, raw) {
 		// Parse content info
 		let args = await checkPrefix(this.main, msg);
+		const containsPoints = msg.content.toLowerCase().includes('owo') || msg.content.toLowerCase().includes('uwu');
 		if (!args) {
 			//if user said owo/uwu
-			if(msg.content.toLowerCase().includes('owo')||msg.content.toLowerCase().includes('uwu')){
+			if (containsPoints) {
 				executeCommand(this.main,initParam(msg,"points",[],this.main));
 			}
 			return;
@@ -43,7 +44,9 @@ class Command {
 
 		//  Check if that command exists
 		if(!commands[command]) {
-			executeCommand(this.main,initParam(msg,"points",[],this.main));
+			if (containsPoints) {
+				executeCommand(this.main,initParam(msg,"points",[],this.main));
+			}
 			return;
 		}
 
@@ -93,7 +96,7 @@ class Command {
 
 		let param = initParam(msg,command,args,this.main);
 
-		if(msg.channel.type==1){
+		if(!msg.channel.guild){
 			if(adminCommands[command]&&adminCommands[command].dm)
 				adminCommands[command].execute(param);
 		}else{
@@ -150,6 +153,7 @@ async function executeCommand(main,p){
 
 	// Log stats to statsd
 	logger.command(p.commandAlias, p.msg);
+	logger.logstash(p.commandAlias, p);
 }
 
 /**

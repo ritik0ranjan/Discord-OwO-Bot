@@ -263,6 +263,7 @@ exports.filteredName = function (name) {
 	}
 	name = name.replace(/\n/g,"")
 		.replace(/\r/g,"")
+		.replace(/\[+|\)+|(\]\(\))+/gi,"")
 		.replace(/https:/gi,"https;")
 		.replace(/http:/gi,"http;")
 		.replace(/discord.gg/gi,"discord,gg")
